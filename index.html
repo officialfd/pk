@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fahad's Valentine Surprise</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
         :root {
@@ -21,26 +22,20 @@
             font-family: 'Poppins', sans-serif; overflow: hidden; transition: background 1s ease;
         }
 
-        /* --- STYLISH POPUP (New) --- */
+        /* --- STYLISH POPUP --- */
         .popup-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 20000;
-            display: none; /* Hidden by default */
-            justify-content: center; align-items: center;
-            backdrop-filter: blur(5px); /* Blurs background */
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(5px);
         }
         
         .popup-box {
-            background: #fff0f3;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 320px;
-            width: 85%;
+            background: #fff0f3; padding: 30px; border-radius: 20px;
+            text-align: center; max-width: 320px; width: 85%;
             box-shadow: 0 15px 40px rgba(255, 77, 109, 0.4);
             border: 3px solid #ffb7c5;
             animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
         }
 
         @keyframes popIn {
@@ -48,26 +43,12 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .popup-box h3 {
-            color: #d90429;
-            font-family: 'Pacifico', cursive;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .popup-box p {
-            color: #555;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
+        .popup-box h3 { color: #d90429; font-family: 'Pacifico', cursive; font-size: 1.8rem; margin-bottom: 10px; }
+        .popup-box p { color: #555; font-size: 1rem; line-height: 1.6; margin-bottom: 20px; }
         .popup-btn {
-            background: #ff4d6d; color: white; border: none;
-            padding: 10px 25px; border-radius: 50px;
+            background: #ff4d6d; color: white; border: none; padding: 10px 25px; border-radius: 50px;
             font-size: 1rem; font-weight: bold; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); transition: transform 0.2s;
         }
         .popup-btn:active { transform: scale(0.95); }
 
@@ -93,7 +74,7 @@
         }
         .enter-btn:hover { background: #d90429; }
 
-        /* --- MAIN STYLES --- */
+        /* --- MAIN UI --- */
         .bg-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         .heart { position: absolute; bottom: -50px; animation: float 10s linear infinite; opacity: 0.6; }
         @keyframes float { to { transform: translateY(-110vh) rotate(360deg); } }
@@ -104,7 +85,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000; font-size: 1.2rem;
             animation: pulse 2s infinite; display: none;
         }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         #menu-screen { text-align: center; width: 100%; max-width: 800px; z-index: 100; transition: 0.5s; padding: 20px; display: none; }
         .title-container h1 { font-family: 'Pacifico', cursive; font-size: 2.5rem; color: #d90429; text-shadow: 2px 2px 0 #fff; margin-bottom: 5px; }
@@ -116,6 +96,7 @@
         .icon { font-size: 2.2rem; display: block; margin-bottom: 5px; }
         .locked-badge { position: absolute; top: 5px; right: 5px; font-size: 1rem; }
 
+        /* --- LETTER & ENVELOPE --- */
         #letter-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 200; }
         .back-btn { position: absolute; top: 20px; left: 20px; background: #fff; padding: 8px 15px; border-radius: 20px; border: none; font-weight: bold; cursor: pointer; }
 
@@ -192,10 +173,11 @@
         // === PASSWORD SETUP ===
         const SECRET_PASS = "Fahad"; // Password
 
-        // === DATE SETUP (11 November 2021) ===
-        const startDate = new Date(2021, 11, 5); 
+        // === DATE SETUP (5 Nov 2021) ===
+        // Year: 2021, Month: 10 (Nov), Day: 5
+        const startDate = new Date(2021, 10, 5); 
 
-        // Year 2026 ke liye Dates
+        // Year 2026 ke liye Target Dates
         const days = [
             { id: 7, name: "Rose Day", date: "Feb 7", icon: "🌹", color: "#e01e37", title: "My Beautiful Rose",
               image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400",
@@ -230,20 +212,19 @@
               msg: "Tum ho to main hoon. Meri har khushi tumse shuru hoti hai. Happy Valentine's Day Jaan! I Love You." }
         ];
 
-        // === PASSWORD FUNCTION ===
+        // === LOGIC FUNCTIONS ===
         function checkPassword() {
             const input = document.getElementById('password').value;
             if (input === SECRET_PASS) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('menu-screen').style.display = 'block';
                 document.querySelector('.music-btn').style.display = 'flex';
-                document.getElementById('bgMusic').play().catch(() => console.log("Click music btn manually"));
+                document.getElementById('bgMusic').play().catch(() => console.log("Manual play needed"));
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }
         }
 
-        // === POPUP FUNCTIONS (NEW) ===
         function showPopup(msg) {
             document.getElementById('popup-message').innerHTML = msg;
             document.getElementById('custom-popup').style.display = 'flex';
@@ -253,30 +234,19 @@
             document.getElementById('custom-popup').style.display = 'none';
         }
 
-        // === DATE LOCK LOGIC ===
+        // Lock Logic (Assuming target year 2026)
         function isDateLocked(dayId) {
             const today = new Date();
             const currentYear = today.getFullYear(); 
             const currentMonth = today.getMonth(); 
             const currentDate = today.getDate();
 
-            // Logic: 2026 se pehle ya Feb mein date se pehle lock rahe
             if (currentYear < 2026) return true;
             if (currentYear === 2026 && currentMonth < 1) return true; // Before Feb
-            if (currentYear === 2026 && currentMonth === 1 && currentDate < dayId) return true; // In Feb, before date
+            if (currentYear === 2026 && currentMonth === 1 && currentDate < dayId) return true; // In Feb
             
             return false;
         }
-
-        // === SYSTEM LOGIC ===
-        const menuScreen = document.getElementById('menu-screen');
-        const letterScreen = document.getElementById('letter-screen');
-        const env = document.getElementById('env');
-        const card = document.getElementById('finalLetter');
-        const audio = document.getElementById('bgMusic');
-        let currentData = null;
-        let isPlaying = false;
-        let typeInterval;
 
         function updateTimer() {
             const now = new Date();
@@ -285,10 +255,11 @@
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
-            document.getElementById("love-timer").innerText = `Together since 8 Apr 2025: ${days}d ${hours}h ${minutes}m ${seconds}s ❤️`;
+            document.getElementById("love-timer").innerText = `Together since 5 Nov 2021: ${days}d ${hours}h ${minutes}m ${seconds}s ❤️`;
         }
         setInterval(updateTimer, 1000);
 
+        // Grid Generation
         const grid = document.getElementById('grid');
         days.forEach((day, index) => {
             let div = document.createElement('div');
@@ -299,10 +270,17 @@
             grid.appendChild(div);
         });
 
+        let currentData = null;
+        let isPlaying = false;
+        let typeInterval;
+        const menuScreen = document.getElementById('menu-screen');
+        const letterScreen = document.getElementById('letter-screen');
+        const env = document.getElementById('env');
+        const card = document.getElementById('finalLetter');
+        const audio = document.getElementById('bgMusic');
+
         function loadDay(index) {
             currentData = days[index];
-            
-            // --- POPUP CHECK ---
             if (isDateLocked(currentData.id)) {
                 showPopup(`Ye din (${currentData.date}) abhi nahi aaya hai.<br>Sabar ka phal meetha hota hai meri jaan! ❤️`);
                 return;
@@ -325,6 +303,14 @@
 
         function openEnvelope() {
             env.classList.add('open');
+            // CONFETTI BLAST!
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: [currentData.color, '#ffffff']
+            });
+
             setTimeout(() => {
                 env.style.display = 'none';
                 card.classList.add('show');
@@ -371,4 +357,3 @@
     </script>
 </body>
 </html>
-

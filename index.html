@@ -480,6 +480,266 @@
         }
         .promise-msg.visible { opacity: 1; }
 
+        .promise-strength {
+            width: min(100%, 380px);
+            background: rgba(0, 119, 182, 0.08);
+            border: 1px solid rgba(0, 119, 182, 0.2);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .promise-strength-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #005f87;
+            letter-spacing: 0.4px;
+        }
+        .promise-strength-track {
+            margin-top: 8px;
+            height: 10px;
+            width: 100%;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .promise-strength-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #adb5bd, #6c757d);
+            transition: width 0.12s linear, background 0.25s ease;
+        }
+        .promise-strength.complete .promise-strength-fill {
+            background: linear-gradient(90deg, #4cc9f0, #0077b6);
+        }
+        .promise-strength-note {
+            margin-top: 8px;
+            min-height: 1.1em;
+            font-size: 0.75rem;
+            color: #4f5d75;
+            letter-spacing: 0.2px;
+        }
+
+        .promise-certificate-panel {
+            width: min(100%, 380px);
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(176, 137, 104, 0.35);
+            border-radius: 18px;
+            padding: 14px;
+            box-shadow: 0 10px 22px rgba(79, 93, 117, 0.12);
+            opacity: 0;
+            transform: translateY(14px);
+            pointer-events: none;
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        .promise-certificate-panel.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .promise-cert-heading {
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            color: #5d4037;
+            letter-spacing: 0.4px;
+            text-align: left;
+        }
+        .promise-cert-form {
+            display: grid;
+            gap: 8px;
+        }
+        .promise-cert-input,
+        .promise-cert-select,
+        .promise-cert-textarea {
+            width: 100%;
+            border: 1px solid #d8c3a5;
+            border-radius: 10px;
+            padding: 10px 11px;
+            font-size: 0.88rem;
+            font-family: 'Poppins', sans-serif;
+            color: #4e342e;
+            background: rgba(255, 255, 255, 0.92);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .promise-cert-input:focus,
+        .promise-cert-select:focus,
+        .promise-cert-textarea:focus {
+            border-color: #b08968;
+            box-shadow: 0 0 0 3px rgba(176, 137, 104, 0.2);
+        }
+        .promise-cert-textarea {
+            min-height: 68px;
+            resize: vertical;
+        }
+        .promise-cert-btn-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .promise-cert-btn {
+            border: none;
+            border-radius: 10px;
+            padding: 10px 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+        }
+        .promise-cert-btn:active { transform: scale(0.97); }
+        .promise-cert-btn[disabled] {
+            cursor: not-allowed;
+            opacity: 0.45;
+            box-shadow: none;
+            transform: none;
+        }
+        .promise-cert-btn.generate {
+            background: #0077b6;
+            box-shadow: 0 6px 14px rgba(0, 119, 182, 0.25);
+        }
+        .promise-cert-btn.share {
+            background: #25D366;
+            box-shadow: 0 6px 14px rgba(37, 211, 102, 0.25);
+        }
+        .promise-cert-btn.download {
+            background: #ef476f;
+            box-shadow: 0 6px 14px rgba(239, 71, 111, 0.25);
+        }
+        .promise-cert-status {
+            min-height: 1.1em;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #4f5d75;
+            text-align: left;
+        }
+        .promise-certificate-preview {
+            margin-top: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(176, 137, 104, 0.5);
+            overflow: hidden;
+        }
+        .promise-certificate-paper {
+            position: relative;
+            min-height: 0;
+            aspect-ratio: 16 / 10;
+            padding: 18px 16px;
+            background:
+                radial-gradient(circle at 12% 14%, rgba(255, 255, 255, 0.65), transparent 45%),
+                radial-gradient(circle at 86% 80%, rgba(255, 255, 255, 0.45), transparent 45%),
+                linear-gradient(135deg, #f7ecd0, #eed7b0);
+            border: 7px double #b08968;
+            color: #4e342e;
+        }
+        .promise-certificate-paper::before {
+            content: "FOREVER";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-18deg);
+            font-family: 'Georgia', serif;
+            font-size: 2.2rem;
+            color: rgba(176, 137, 104, 0.12);
+            letter-spacing: 4px;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .promise-certificate-paper > * {
+            position: relative;
+            z-index: 1;
+        }
+        .promise-cert-title {
+            font-family: 'Georgia', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.8px;
+            color: #5d4037;
+            margin-bottom: 4px;
+        }
+        .promise-cert-subtitle {
+            text-align: center;
+            font-size: 0.74rem;
+            color: #7f5539;
+            letter-spacing: 0.6px;
+            margin-bottom: 10px;
+        }
+        .promise-cert-name {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #8d0801;
+            margin-bottom: 8px;
+        }
+        .promise-cert-couple {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7f5539;
+            letter-spacing: 0.4px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .promise-cert-body {
+            font-family: 'Georgia', serif;
+            font-size: 0.98rem;
+            line-height: 1.55;
+            text-align: center;
+            color: #5f4339;
+            min-height: 68px;
+        }
+        .promise-cert-footer {
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        .promise-cert-date {
+            font-size: 0.72rem;
+            color: #7f5539;
+            margin-bottom: 6px;
+        }
+        .promise-seal-mark {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at 35% 30%, #cf1b5b, #8d0801 70%);
+            color: #fefae0;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(141, 8, 1, 0.35);
+        }
+        .promise-cert-sign {
+            text-align: right;
+        }
+        .promise-cert-sign span {
+            display: block;
+            font-size: 0.68rem;
+            color: #7f5539;
+            margin-bottom: 4px;
+        }
+        .promise-cert-sign strong {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.35rem;
+            color: #8d0801;
+        }
+
+        @media (max-width: 420px) {
+            .promise-cert-btn-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* --- HUG DAY SPECIAL --- */
         .hug-warmth {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -1171,6 +1431,12 @@
             clearTimeout(vdayTimer3);
             clearTimeout(vdayTimer4);
             clearTimeout(kissTimer);
+            clearTimeout(promiseHoldTimer);
+            clearInterval(promiseStrengthInterval);
+            promiseHoldStart = 0;
+
+            const promiseSeal = document.querySelector('.promise-seal');
+            if (promiseSeal) promiseSeal.classList.remove('holding');
 
             clearInterval(typeInterval);
             document.removeEventListener('click', placeKiss); // Cleanup kiss mode
@@ -1260,12 +1526,65 @@
             else if (id === 11) { // Promise Day: Wax Seal
                 container.innerHTML = `
                     <div id="promise-container" class="promise-container">
+                        <div class="promise-strength" id="promise-strength">
+                            <div class="promise-strength-head">
+                                <span>Promise Strength</span>
+                                <span id="promise-strength-percentage">0%</span>
+                            </div>
+                            <div class="promise-strength-track">
+                                <div class="promise-strength-fill" id="promise-strength-fill"></div>
+                            </div>
+                            <p class="promise-strength-note" id="promise-strength-note">Press and hold the seal to forge this promise.</p>
+                        </div>
                         <div class="promise-seal" 
                              onmousedown="startPromiseHold(event)" ontouchstart="startPromiseHold(event)"
                              onmouseup="cancelPromiseHold()" ontouchend="cancelPromiseHold()" onmouseleave="cancelPromiseHold()">
                             <svg class="promise-seal-icon" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3 3.1-3s3.1 1.29 3.1 3v2z"/></svg>
                         </div>
                         <div class="promise-msg" id="promise-msg"></div>
+
+                        <div class="promise-certificate-panel" id="promise-certificate-panel">
+                            <h4 class="promise-cert-heading">Digital Promise Certificate</h4>
+                            <div class="promise-cert-form">
+                                <input id="certificate-your-name" class="promise-cert-input" type="text" maxlength="40" placeholder="Your name">
+                                <input id="certificate-name" class="promise-cert-input" type="text" maxlength="40" placeholder="Partner name">
+                                <select id="certificate-promise-select" class="promise-cert-select">
+                                    <option value="I will always choose you, every single day.">Always choose you, every single day</option>
+                                    <option value="I will protect your smile in every season.">Protect your smile in every season</option>
+                                    <option value="I will listen with patience, even in hard moments.">Listen with patience in hard moments</option>
+                                    <option value="I will stand beside you in every storm.">Stand beside you in every storm</option>
+                                    <option value="I will keep your secrets safe in my heart.">Keep your secrets safe</option>
+                                    <option value="I will love you loudly and gently.">Love you loudly and gently</option>
+                                </select>
+                                <textarea id="certificate-custom-line" class="promise-cert-textarea" maxlength="180" placeholder="Custom promise line (editable)"></textarea>
+                            </div>
+                            <div class="promise-cert-btn-row">
+                                <button class="promise-cert-btn generate" id="generate-certificate-btn" onclick="generatePromiseCertificate()">Generate</button>
+                                <button class="promise-cert-btn share" id="share-certificate-btn" onclick="sharePromiseCertificate()" disabled>Share</button>
+                                <button class="promise-cert-btn download" id="download-certificate-btn" onclick="downloadPromiseCertificate()" disabled>Download</button>
+                            </div>
+                            <p class="promise-cert-status" id="promise-certificate-status">Seal the promise first to unlock your certificate.</p>
+
+                            <div class="promise-certificate-preview" id="promise-certificate-preview" style="display:none;">
+                                <div class="promise-certificate-paper" id="promise-certificate-paper">
+                                    <p class="promise-cert-title">Certificate of Promise</p>
+                                    <p class="promise-cert-subtitle">THIS IS TO HONOR A HEARTFELT COMMITMENT</p>
+                                    <p class="promise-cert-couple" id="promise-cert-preview-couple">Your Name ❤ Partner Name</p>
+                                    <p class="promise-cert-name" id="promise-cert-preview-name">My Love</p>
+                                    <p class="promise-cert-body" id="promise-cert-preview-text">I will always choose you, every single day.</p>
+                                    <div class="promise-cert-footer">
+                                        <div>
+                                            <div class="promise-cert-date" id="promise-cert-preview-date">Date</div>
+                                            <div class="promise-seal-mark">SEAL</div>
+                                        </div>
+                                        <div class="promise-cert-sign">
+                                            <span>Signed with love</span>
+                                            <strong id="promise-cert-preview-sign">Forever Yours</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `;
                 initPromiseDay();
@@ -1466,21 +1785,799 @@
 
         // === PROMISE DAY LOGIC ===
         const PROMISE_CONFIG = { holdDuration: 4500, silenceDuration: 7000 };
+        const PROMISE_CERTIFICATE_KEY = 'promise_certificate_data';
         let promiseHoldStart = 0;
         let promiseHoldTimer = null;
+        let promiseStrengthInterval = null;
         let isPromiseSealed = false;
+
+        function clampNumber(value, min, max) {
+            return Math.max(min, Math.min(max, value));
+        }
+
+        function formatPromiseCertificateDate(timeValue) {
+            return new Date(timeValue).toLocaleDateString('en-US', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function setPromiseCertificateStatus(message, isError = false) {
+            const statusEl = document.getElementById('promise-certificate-status');
+            if (!statusEl) return;
+            statusEl.innerText = message;
+            statusEl.style.color = isError ? '#d90429' : '#4f5d75';
+        }
+
+        function buildDefaultPromiseLine(yourName, partnerName, selectedTemplate) {
+            const safeYourName = (yourName || '').trim() || 'Your Name';
+            const safePartnerName = (partnerName || '').trim() || 'Partner Name';
+            const safeTemplate = (selectedTemplate || 'I will always choose you, every single day.').trim();
+            return `I, ${safeYourName}, promise ${safePartnerName} that ${safeTemplate}`;
+        }
+
+        function autofillPromiseLine(force = false) {
+            const yourNameInput = document.getElementById('certificate-your-name');
+            const partnerNameInput = document.getElementById('certificate-name');
+            const promiseSelect = document.getElementById('certificate-promise-select');
+            const customLineInput = document.getElementById('certificate-custom-line');
+
+            if (!yourNameInput || !partnerNameInput || !promiseSelect || !customLineInput) return;
+
+            const userEdited = customLineInput.dataset.userEdited === 'true';
+            if (!force && userEdited) return;
+
+            customLineInput.value = buildDefaultPromiseLine(
+                yourNameInput.value,
+                partnerNameInput.value,
+                promiseSelect.value
+            );
+            customLineInput.dataset.userEdited = 'false';
+        }
+
+        function attachPromiseLineAutofillListeners() {
+            const yourNameInput = document.getElementById('certificate-your-name');
+            const partnerNameInput = document.getElementById('certificate-name');
+            const promiseSelect = document.getElementById('certificate-promise-select');
+            const customLineInput = document.getElementById('certificate-custom-line');
+
+            if (!yourNameInput || !partnerNameInput || !promiseSelect || !customLineInput) return;
+
+            const refreshDefault = () => autofillPromiseLine(false);
+            yourNameInput.addEventListener('input', refreshDefault);
+            partnerNameInput.addEventListener('input', refreshDefault);
+            promiseSelect.addEventListener('change', refreshDefault);
+
+            customLineInput.addEventListener('input', () => {
+                customLineInput.dataset.userEdited = 'true';
+            });
+            customLineInput.addEventListener('blur', () => {
+                if (!customLineInput.value.trim()) {
+                    customLineInput.dataset.userEdited = 'false';
+                    autofillPromiseLine(true);
+                }
+            });
+        }
+
+        function setPromiseStrength(value, noteText) {
+            const safeValue = Math.round(clampNumber(value, 0, 100));
+            const fill = document.getElementById('promise-strength-fill');
+            const percentage = document.getElementById('promise-strength-percentage');
+            const note = document.getElementById('promise-strength-note');
+            const meter = document.getElementById('promise-strength');
+
+            if (fill) {
+                fill.style.width = safeValue + '%';
+                if (safeValue < 35) fill.style.background = 'linear-gradient(90deg, #adb5bd, #6c757d)';
+                else if (safeValue < 70) fill.style.background = 'linear-gradient(90deg, #8ecae6, #219ebc)';
+                else fill.style.background = 'linear-gradient(90deg, #4cc9f0, #0077b6)';
+            }
+            if (percentage) percentage.innerText = safeValue + '%';
+            if (note && typeof noteText === 'string') note.innerText = noteText;
+            if (meter) meter.classList.toggle('complete', safeValue >= 100);
+        }
+
+        function enablePromiseCertificateActions(isEnabled) {
+            const shareBtn = document.getElementById('share-certificate-btn');
+            const downloadBtn = document.getElementById('download-certificate-btn');
+            if (shareBtn) shareBtn.disabled = !isEnabled;
+            if (downloadBtn) downloadBtn.disabled = !isEnabled;
+        }
+
+        function getStoredPromiseCertificate() {
+            try {
+                const rawData = localStorage.getItem(PROMISE_CERTIFICATE_KEY);
+                return rawData ? JSON.parse(rawData) : null;
+            } catch (error) {
+                console.error('Could not parse saved promise certificate:', error);
+                return null;
+            }
+        }
+
+        function isPromiseCertificateReady(data) {
+            return Boolean(
+                data &&
+                typeof data.partnerName === 'string' &&
+                data.partnerName.trim() &&
+                typeof data.promiseLine === 'string' &&
+                data.promiseLine.trim()
+            );
+        }
+
+        function renderPromiseCertificate(data) {
+            const preview = document.getElementById('promise-certificate-preview');
+            const coupleEl = document.getElementById('promise-cert-preview-couple');
+            const nameEl = document.getElementById('promise-cert-preview-name');
+            const textEl = document.getElementById('promise-cert-preview-text');
+            const dateEl = document.getElementById('promise-cert-preview-date');
+            const signEl = document.getElementById('promise-cert-preview-sign');
+
+            if (!preview || !coupleEl || !nameEl || !textEl || !dateEl || !signEl) return;
+
+            const yourName = (
+                (typeof data.yourName === 'string' && data.yourName.trim()) ||
+                (typeof data.signedBy === 'string' && data.signedBy.trim() && data.signedBy !== 'Forever Yours') ||
+                'Your Name'
+            );
+            const partnerName = (data.partnerName || 'Partner Name').trim() || 'Partner Name';
+            const promiseText = (data.promiseLine || '').trim() || 'I will always choose you, every single day.';
+            const dateText = data.dateText || formatPromiseCertificateDate(Date.now());
+
+            coupleEl.innerText = `${yourName} ❤ ${partnerName}`;
+            nameEl.innerText = partnerName;
+            textEl.innerText = promiseText;
+            dateEl.innerText = dateText;
+            signEl.innerText = yourName;
+            preview.style.display = 'block';
+            enablePromiseCertificateActions(true);
+        }
+
+        function initializePromiseCertificateForm() {
+            const yourNameInput = document.getElementById('certificate-your-name');
+            const nameInput = document.getElementById('certificate-name');
+            const promiseSelect = document.getElementById('certificate-promise-select');
+            const customLineInput = document.getElementById('certificate-custom-line');
+            const preview = document.getElementById('promise-certificate-preview');
+
+            if (!yourNameInput || !nameInput || !promiseSelect || !customLineInput) return;
+
+            const saved = getStoredPromiseCertificate();
+            customLineInput.dataset.userEdited = 'false';
+
+            if (isPromiseCertificateReady(saved)) {
+                const savedSigner = (
+                    (saved.yourName || '').trim() ||
+                    ((saved.signedBy || '').trim() !== 'Forever Yours' ? (saved.signedBy || '').trim() : '')
+                );
+                yourNameInput.value = savedSigner;
+                nameInput.value = saved.partnerName || '';
+                if (
+                    saved.selectedTemplate &&
+                    Array.from(promiseSelect.options).some(opt => opt.value === saved.selectedTemplate)
+                ) {
+                    promiseSelect.value = saved.selectedTemplate;
+                }
+                if ((saved.customLine || '').trim()) {
+                    customLineInput.value = saved.customLine;
+                    customLineInput.dataset.userEdited = 'true';
+                } else {
+                    autofillPromiseLine(true);
+                }
+                attachPromiseLineAutofillListeners();
+                renderPromiseCertificate(saved);
+                setPromiseCertificateStatus('Certificate restored. You can share or download it.');
+                return;
+            }
+
+            if (!promiseSelect.value && promiseSelect.options.length) {
+                promiseSelect.value = promiseSelect.options[0].value;
+            }
+            autofillPromiseLine(true);
+            attachPromiseLineAutofillListeners();
+            if (preview) preview.style.display = 'none';
+            enablePromiseCertificateActions(false);
+            setPromiseCertificateStatus('Default line is pre-filled. Edit it if needed, then tap Generate.');
+        }
+
+        function setPromiseCertificateUnlocked(isUnlocked) {
+            const panel = document.getElementById('promise-certificate-panel');
+            const generateBtn = document.getElementById('generate-certificate-btn');
+            const preview = document.getElementById('promise-certificate-preview');
+
+            if (!panel) return;
+            panel.classList.toggle('active', isUnlocked);
+
+            if (generateBtn) generateBtn.disabled = !isUnlocked;
+
+            if (!isUnlocked) {
+                enablePromiseCertificateActions(false);
+                if (preview) preview.style.display = 'none';
+                setPromiseCertificateStatus('Seal the promise first to unlock your certificate.');
+                return;
+            }
+            initializePromiseCertificateForm();
+        }
+
+        function collectPromiseCertificateData() {
+            if (!isPromiseSealed) {
+                setPromiseCertificateStatus('Seal your promise first.', true);
+                return null;
+            }
+
+            const yourNameInput = document.getElementById('certificate-your-name');
+            const nameInput = document.getElementById('certificate-name');
+            const promiseSelect = document.getElementById('certificate-promise-select');
+            const customLineInput = document.getElementById('certificate-custom-line');
+
+            if (!yourNameInput || !nameInput || !promiseSelect || !customLineInput) return null;
+
+            const rawYourName = yourNameInput.value.trim().slice(0, 40);
+            const rawPartnerName = nameInput.value.trim().slice(0, 40);
+            const yourName = rawYourName || 'Your Name';
+            const partnerName = rawPartnerName || 'Partner Name';
+            const selectedTemplate = promiseSelect.value.trim();
+            const customLine = customLineInput.value.trim().slice(0, 180);
+            const fallbackLine = buildDefaultPromiseLine(yourName, partnerName, selectedTemplate);
+            const promiseLine = (customLine || fallbackLine).trim();
+
+            if (!promiseLine) {
+                setPromiseCertificateStatus('Please select or write a promise line.', true);
+                return null;
+            }
+
+            // Keep form synced with resolved defaults so Download/Share always works.
+            if (!rawYourName) yourNameInput.value = yourName;
+            if (!rawPartnerName) nameInput.value = partnerName;
+            if (!customLine) {
+                customLineInput.value = fallbackLine;
+                customLineInput.dataset.userEdited = 'false';
+            }
+
+            const createdAt = Date.now();
+            return {
+                yourName,
+                partnerName,
+                selectedTemplate,
+                customLine,
+                promiseLine,
+                createdAt,
+                dateText: formatPromiseCertificateDate(createdAt),
+                signedBy: yourName
+            };
+        }
+
+        function generatePromiseCertificate() {
+            const data = collectPromiseCertificateData();
+            if (!data) return null;
+
+            localStorage.setItem(PROMISE_CERTIFICATE_KEY, JSON.stringify(data));
+            renderPromiseCertificate(data);
+            if (data.yourName === 'Your Name' || data.partnerName === 'Partner Name') {
+                setPromiseCertificateStatus('Certificate ready. Tip: add both real names for a personalized version.');
+            } else {
+                setPromiseCertificateStatus('Certificate is ready. Share it or download it.');
+            }
+            if (navigator.vibrate) navigator.vibrate(40);
+            return data;
+        }
+
+        function ensurePromiseCertificateData() {
+            const yourNameInput = document.getElementById('certificate-your-name');
+            const nameInput = document.getElementById('certificate-name');
+            const promiseSelect = document.getElementById('certificate-promise-select');
+            const customLineInput = document.getElementById('certificate-custom-line');
+            const saved = getStoredPromiseCertificate();
+            if (yourNameInput && nameInput && promiseSelect && customLineInput) {
+                const yourName = yourNameInput.value.trim().slice(0, 40) || 'Your Name';
+                const partnerName = nameInput.value.trim().slice(0, 40) || 'Partner Name';
+                const selectedTemplate = promiseSelect.value.trim();
+                const customLine = customLineInput.value.trim().slice(0, 180);
+                const fallbackLine = buildDefaultPromiseLine(yourName, partnerName, selectedTemplate);
+                const promiseLine = (customLine || fallbackLine).trim();
+                const hasCurrentFormData = Boolean(promiseLine);
+                const savedSigner = (
+                    ((saved && saved.yourName) || '').trim() ||
+                    (((saved && saved.signedBy) || '').trim() !== 'Forever Yours' ? ((saved && saved.signedBy) || '').trim() : '')
+                );
+
+                if (hasCurrentFormData) {
+                    if (
+                        isPromiseCertificateReady(saved) &&
+                        savedSigner === yourName &&
+                        saved.partnerName === partnerName &&
+                        saved.promiseLine === promiseLine
+                    ) {
+                        return saved;
+                    }
+                    return generatePromiseCertificate();
+                }
+            }
+
+            if (isPromiseCertificateReady(saved)) return saved;
+            return generatePromiseCertificate();
+        }
+
+        function splitTextIntoLines(drawCtx, text, maxWidth) {
+            const words = (text || '').split(/\s+/).filter(Boolean);
+            if (!words.length) return [''];
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                const testLine = currentLine + ' ' + words[i];
+                if (drawCtx.measureText(testLine).width <= maxWidth) currentLine = testLine;
+                else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        function drawWrappedCanvasText(drawCtx, text, x, y, maxWidth, lineHeight) {
+            const lines = splitTextIntoLines(drawCtx, text, maxWidth);
+            lines.forEach((line, index) => drawCtx.fillText(line, x, y + (index * lineHeight)));
+            return y + (lines.length * lineHeight);
+        }
+
+        function drawCertificateCorner(drawCtx, x, y, size, flipX, flipY) {
+            drawCtx.save();
+            drawCtx.translate(x, y);
+            drawCtx.scale(flipX, flipY);
+            drawCtx.beginPath();
+            drawCtx.moveTo(0, 0);
+            drawCtx.bezierCurveTo(size * 0.08, size * 0.03, size * 0.3, size * 0.08, size * 0.42, size * 0.22);
+            drawCtx.bezierCurveTo(size * 0.5, size * 0.33, size * 0.4, size * 0.47, size * 0.24, size * 0.43);
+            drawCtx.stroke();
+            drawCtx.restore();
+        }
+
+        function createPromiseCertificateCanvas(data) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1600;
+            canvas.height = 1100;
+            const drawCtx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const yourName = (
+                (typeof data.yourName === 'string' && data.yourName.trim()) ||
+                (typeof data.signedBy === 'string' && data.signedBy.trim() && data.signedBy !== 'Forever Yours') ||
+                'Your Name'
+            );
+            const partnerName = (data.partnerName || 'Partner Name').trim() || 'Partner Name';
+            const promiseText = (data.promiseLine || '').trim() || 'I will always choose you, every single day.';
+
+            const paperGradient = drawCtx.createLinearGradient(0, 0, 0, height);
+            paperGradient.addColorStop(0, '#f9efd8');
+            paperGradient.addColorStop(0.5, '#f2e1bf');
+            paperGradient.addColorStop(1, '#e8cf9f');
+            drawCtx.fillStyle = paperGradient;
+            drawCtx.fillRect(0, 0, width, height);
+
+            for (let i = 0; i < 2600; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const alpha = Math.random() * 0.06;
+                drawCtx.fillStyle = `rgba(125, 93, 72, ${alpha})`;
+                drawCtx.fillRect(x, y, 1, 1);
+            }
+
+            drawCtx.strokeStyle = '#7f5539';
+            drawCtx.lineWidth = 6;
+            drawCtx.strokeRect(52, 52, width - 104, height - 104);
+
+            drawCtx.strokeStyle = '#c9a66b';
+            drawCtx.lineWidth = 2;
+            drawCtx.strokeRect(78, 78, width - 156, height - 156);
+
+            drawCtx.strokeStyle = 'rgba(127, 85, 57, 0.7)';
+            drawCtx.lineWidth = 5;
+            drawCertificateCorner(drawCtx, 96, 96, 240, 1, 1);
+            drawCertificateCorner(drawCtx, width - 96, 96, 240, -1, 1);
+            drawCertificateCorner(drawCtx, 96, height - 96, 240, 1, -1);
+            drawCertificateCorner(drawCtx, width - 96, height - 96, 240, -1, -1);
+
+            drawCtx.textAlign = 'center';
+            drawCtx.fillStyle = 'rgba(176, 137, 104, 0.13)';
+            drawCtx.font = '700 146px Georgia';
+            drawCtx.fillText('FOREVER', width / 2, height / 2 + 35);
+
+            drawCtx.fillStyle = '#5d4037';
+            drawCtx.font = '700 82px Georgia';
+            drawCtx.fillText('Certificate of Promise', width / 2, 238);
+
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '600 26px Poppins';
+            drawCtx.fillText('THIS IS TO HONOR A HEARTFELT COMMITMENT', width / 2, 290);
+
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '600 34px Poppins';
+            drawCtx.fillText(`${yourName} ❤ ${partnerName}`, width / 2, 352);
+
+            drawCtx.fillStyle = '#8d0801';
+            drawCtx.font = '700 100px "Dancing Script", cursive';
+            drawCtx.fillText(partnerName, width / 2, 430);
+
+            drawCtx.fillStyle = '#5f4339';
+            drawCtx.font = 'italic 40px Georgia';
+            drawCtx.fillText(`${yourName} promises that`, width / 2, 505);
+
+            drawCtx.font = '700 45px Georgia';
+            const nextY = drawWrappedCanvasText(drawCtx, `"${promiseText}"`, width / 2, 570, 1080, 60);
+
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '500 30px Poppins';
+            drawCtx.fillText(`Sealed on ${dateText}`, width / 2, nextY + 72);
+
+            const waxGradient = drawCtx.createRadialGradient(250, 820, 20, 250, 820, 95);
+            waxGradient.addColorStop(0, '#d23f68');
+            waxGradient.addColorStop(1, '#8d0801');
+            drawCtx.fillStyle = waxGradient;
+            drawCtx.beginPath();
+            drawCtx.arc(250, 820, 95, 0, Math.PI * 2);
+            drawCtx.fill();
+            drawCtx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+            drawCtx.lineWidth = 6;
+            drawCtx.stroke();
+            drawCtx.fillStyle = '#fefae0';
+            drawCtx.font = '700 56px Georgia';
+            drawCtx.fillText('❤', 250, 810);
+            drawCtx.font = '700 30px Georgia';
+            drawCtx.fillText('SEAL', 250, 858);
+
+            drawCtx.strokeStyle = '#6d4c41';
+            drawCtx.lineWidth = 3;
+            drawCtx.beginPath();
+            drawCtx.moveTo(985, 855);
+            drawCtx.lineTo(1450, 855);
+            drawCtx.stroke();
+
+            drawCtx.textAlign = 'right';
+            drawCtx.fillStyle = '#8d0801';
+            drawCtx.font = '700 64px "Dancing Script", cursive';
+            drawCtx.fillText(yourName, 1450, 835);
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '500 24px Poppins';
+            drawCtx.fillText('Signed with love', 1450, 900);
+
+            return canvas;
+        }
+
+        function createPromiseCertificateCanvasSimple(data) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1600;
+            canvas.height = 1000;
+            const drawCtx = canvas.getContext('2d');
+            if (!drawCtx) throw new Error('Canvas rendering is not supported on this browser.');
+
+            const yourName = (
+                (typeof data.yourName === 'string' && data.yourName.trim()) ||
+                (typeof data.signedBy === 'string' && data.signedBy.trim() && data.signedBy !== 'Forever Yours') ||
+                'Your Name'
+            );
+            const partnerName = (data.partnerName || 'Partner Name').trim() || 'Partner Name';
+            const promiseText = (data.promiseLine || '').trim() || 'I will always choose you, every single day.';
+            const dateText = data.dateText || formatPromiseCertificateDate(Date.now());
+
+            const w = canvas.width;
+            const h = canvas.height;
+
+            const bg = drawCtx.createLinearGradient(0, 0, 0, canvas.height);
+            bg.addColorStop(0, '#fbf2dd');
+            bg.addColorStop(1, '#ecd1a2');
+            drawCtx.fillStyle = bg;
+            drawCtx.fillRect(0, 0, w, h);
+
+            const glow = drawCtx.createRadialGradient(180, 140, 0, 180, 140, 300);
+            glow.addColorStop(0, 'rgba(255,255,255,0.8)');
+            glow.addColorStop(1, 'rgba(255,255,255,0)');
+            drawCtx.fillStyle = glow;
+            drawCtx.fillRect(0, 0, w, h);
+
+            for (let i = 0; i < 1500; i++) {
+                const x = Math.random() * w;
+                const y = Math.random() * h;
+                const alpha = Math.random() * 0.05;
+                drawCtx.fillStyle = `rgba(111, 78, 55, ${alpha})`;
+                drawCtx.fillRect(x, y, 1, 1);
+            }
+
+            drawCtx.strokeStyle = '#7f5539';
+            drawCtx.lineWidth = 7;
+            drawCtx.strokeRect(58, 58, w - 116, h - 116);
+
+            drawCtx.strokeStyle = '#c9a66b';
+            drawCtx.lineWidth = 3;
+            drawCtx.strokeRect(84, 84, w - 168, h - 168);
+
+            drawCtx.strokeStyle = 'rgba(127, 85, 57, 0.85)';
+            drawCtx.lineWidth = 4;
+            drawCertificateCorner(drawCtx, 98, 98, 180, 1, 1);
+            drawCertificateCorner(drawCtx, w - 98, 98, 180, -1, 1);
+            drawCertificateCorner(drawCtx, 98, h - 98, 180, 1, -1);
+            drawCertificateCorner(drawCtx, w - 98, h - 98, 180, -1, -1);
+
+            drawCtx.textAlign = 'center';
+            drawCtx.fillStyle = 'rgba(176, 137, 104, 0.16)';
+            drawCtx.font = '700 118px Georgia';
+            drawCtx.fillText('FOREVER', w / 2, h / 2 + 30);
+
+            drawCtx.fillStyle = '#5d4037';
+            drawCtx.font = '700 66px Georgia';
+            drawCtx.fillText('Digital Promise Certificate', w / 2, 170);
+
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '600 26px Poppins';
+            drawCtx.fillText('A VOW SEALED WITH HEART, TIME, AND TRUST', w / 2, 220);
+
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '600 34px Poppins';
+            drawCtx.fillText(`${yourName} ❤ ${partnerName}`, w / 2, 290);
+
+            drawCtx.fillStyle = '#8d0801';
+            drawCtx.font = '700 92px "Dancing Script", cursive';
+            drawCtx.fillText(partnerName, w / 2, 390);
+
+            drawCtx.fillStyle = '#5f4339';
+            drawCtx.font = 'italic 40px Georgia';
+            drawCtx.fillText(`${yourName} promises that`, w / 2, 465);
+
+            drawCtx.font = '700 43px Georgia';
+            const endY = drawWrappedCanvasText(drawCtx, `"${promiseText}"`, w / 2, 540, 1120, 56);
+
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '500 32px Poppins';
+            drawCtx.fillText(`Sealed on ${dateText}`, w / 2, endY + 62);
+
+            const stampX = 220;
+            const stampY = h - 180;
+            const waxGradient = drawCtx.createRadialGradient(stampX - 18, stampY - 24, 12, stampX, stampY, 84);
+            waxGradient.addColorStop(0, '#d74a71');
+            waxGradient.addColorStop(1, '#7f0915');
+            drawCtx.fillStyle = waxGradient;
+            drawCtx.beginPath();
+            drawCtx.arc(stampX, stampY, 84, 0, Math.PI * 2);
+            drawCtx.fill();
+            drawCtx.strokeStyle = 'rgba(255,255,255,0.4)';
+            drawCtx.lineWidth = 5;
+            drawCtx.stroke();
+            drawCtx.fillStyle = '#fefae0';
+            drawCtx.font = '700 46px Georgia';
+            drawCtx.fillText('❤', stampX, stampY - 6);
+            drawCtx.font = '700 24px Georgia';
+            drawCtx.fillText('SEAL', stampX, stampY + 34);
+
+            drawCtx.strokeStyle = '#6d4c41';
+            drawCtx.lineWidth = 3;
+            drawCtx.beginPath();
+            drawCtx.moveTo(w - 500, h - 160);
+            drawCtx.lineTo(w - 130, h - 160);
+            drawCtx.stroke();
+
+            drawCtx.fillStyle = '#8d0801';
+            drawCtx.font = '700 60px "Dancing Script", cursive';
+            drawCtx.textAlign = 'right';
+            drawCtx.fillText(yourName, w - 130, h - 170);
+            drawCtx.fillStyle = '#7f5539';
+            drawCtx.font = '500 24px Poppins';
+            drawCtx.fillText('Signed with love', w - 130, h - 120);
+
+            return canvas;
+        }
+
+        function getPromiseCertificateCanvas(data) {
+            try {
+                const richCanvas = createPromiseCertificateCanvas(data);
+                if (richCanvas) return richCanvas;
+            } catch (error) {
+                console.warn('Rich certificate canvas failed, trying simple canvas:', error);
+            }
+            return createPromiseCertificateCanvasSimple(data);
+        }
+
+        function canvasToDataUrlSafe(canvas) {
+            try {
+                return canvas.toDataURL('image/png');
+            } catch (error) {
+                // Some environments fail with default quality settings
+                return canvas.toDataURL('image/png', 0.92);
+            }
+        }
+
+        function triggerDownloadDataUrl(dataUrl, fileName) {
+            const supportsAnchorDownload =
+                typeof HTMLAnchorElement !== 'undefined' &&
+                'download' in HTMLAnchorElement.prototype;
+
+            if (supportsAnchorDownload) {
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                return true;
+            }
+
+            const opened = window.open(dataUrl, '_blank');
+            if (!opened) window.location.href = dataUrl;
+            return true;
+        }
+
+        function openWhatsAppShare(shareText) {
+            const encoded = encodeURIComponent(`Digital Promise Certificate\n${shareText}`);
+            const deepLink = `whatsapp://send?text=${encoded}`;
+            const webLink = `https://wa.me/?text=${encoded}`;
+            const webDesktopLink = `https://web.whatsapp.com/send?text=${encoded}`;
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+
+            if (isMobile) {
+                // Try app first; if it doesn't open, fallback to wa.me.
+                window.location.href = deepLink;
+                setTimeout(() => {
+                    window.location.href = webLink;
+                }, 600);
+                return;
+            }
+
+            const opened = window.open(webDesktopLink, '_blank');
+            if (!opened) {
+                window.location.href = webLink;
+            }
+        }
+
+        function convertCanvasToBlob(canvas) {
+            return new Promise((resolve, reject) => {
+                const makeBlobFromDataUrl = () => {
+                    const dataUrl = canvas.toDataURL('image/png');
+                    const base64 = dataUrl.split(',')[1];
+                    const byteChars = atob(base64);
+                    const bytes = new Uint8Array(byteChars.length);
+                    for (let i = 0; i < byteChars.length; i++) bytes[i] = byteChars.charCodeAt(i);
+                    return new Blob([bytes], { type: 'image/png' });
+                };
+
+                if (canvas.toBlob) {
+                    canvas.toBlob(blob => {
+                        if (blob) {
+                            resolve(blob);
+                            return;
+                        }
+                        // Some browsers return null blob intermittently; use dataURL fallback.
+                        try {
+                            resolve(makeBlobFromDataUrl());
+                        } catch (fallbackError) {
+                            reject(fallbackError);
+                        }
+                    }, 'image/png');
+                    return;
+                }
+
+                try {
+                    resolve(makeBlobFromDataUrl());
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+
+        function slugifyName(input) {
+            return input
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+                .slice(0, 24) || 'my-love';
+        }
+
+        async function downloadPromiseCertificate() {
+            const data = ensurePromiseCertificateData();
+            if (!data) return;
+
+            try {
+                const signerName = (
+                    (typeof data.yourName === 'string' && data.yourName.trim()) ||
+                    (typeof data.signedBy === 'string' && data.signedBy.trim() && data.signedBy !== 'Forever Yours') ||
+                    'your-name'
+                );
+                const partnerName = (data.partnerName || 'partner').trim() || 'partner';
+                const fileName = `promise-certificate-${slugifyName(signerName)}-to-${slugifyName(partnerName)}.png`;
+                const canvas = getPromiseCertificateCanvas(data);
+                const dataUrl = canvasToDataUrlSafe(canvas);
+                triggerDownloadDataUrl(dataUrl, fileName);
+                setPromiseCertificateStatus('Certificate download started. If it opens in a tab, long-press and save image.');
+
+                if (navigator.vibrate) navigator.vibrate(35);
+            } catch (error) {
+                console.error('downloadPromiseCertificate error:', error);
+                const reason = (error && error.message) ? error.message : 'Unknown error';
+                setPromiseCertificateStatus(`Download failed: ${reason}`, true);
+            }
+        }
+
+        async function sharePromiseCertificate() {
+            const data = ensurePromiseCertificateData();
+            if (!data) return;
+
+            const signerName = (
+                (typeof data.yourName === 'string' && data.yourName.trim()) ||
+                (typeof data.signedBy === 'string' && data.signedBy.trim() && data.signedBy !== 'Forever Yours') ||
+                'I'
+            );
+            const partnerName = (data.partnerName || 'my partner').trim() || 'my partner';
+            const promiseText = (data.promiseLine || '').trim() || 'I will always choose you, every single day.';
+            const dateText = data.dateText || formatPromiseCertificateDate(Date.now());
+            const fileName = `promise-certificate-${slugifyName(signerName)}-to-${slugifyName(partnerName)}.png`;
+            const shareText = `${signerName} promises ${partnerName}: "${promiseText}" (${dateText}).`;
+
+            try {
+                const canvas = getPromiseCertificateCanvas(data);
+
+                if (navigator.share) {
+                    if (typeof File !== 'undefined') {
+                        try {
+                            const shareBlob = await convertCanvasToBlob(canvas);
+                            const file = new File([shareBlob], fileName, { type: 'image/png' });
+
+                            // Try file share directly. Some browsers support files even when canShare is missing/unreliable.
+                            await navigator.share({
+                                title: 'Digital Promise Certificate',
+                                text: shareText,
+                                files: [file]
+                            });
+                            setPromiseCertificateStatus('Certificate image shared successfully.');
+                            if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+                            return;
+                        } catch (fileShareError) {
+                            if (fileShareError && fileShareError.name === 'AbortError') {
+                                setPromiseCertificateStatus('Share cancelled.');
+                                return;
+                            }
+                            console.warn('File share is not supported in this browser, using WhatsApp text fallback:', fileShareError);
+                        }
+                    }
+
+                    // Browser supports Web Share but not file sharing.
+                    openWhatsAppShare(shareText);
+                    setPromiseCertificateStatus('Image file share is not supported here. Opened WhatsApp text share.');
+                    return;
+                }
+
+                openWhatsAppShare(shareText);
+                setPromiseCertificateStatus('Share API not available. Opened WhatsApp text share.');
+            } catch (error) {
+                if (error && error.name === 'AbortError') {
+                    setPromiseCertificateStatus('Share cancelled.');
+                    return;
+                }
+                console.error('sharePromiseCertificate error:', error);
+                openWhatsAppShare(shareText);
+                const reason = (error && error.message) ? error.message : 'Unknown error';
+                setPromiseCertificateStatus(`Share failed: ${reason}. Opened WhatsApp text share instead.`, true);
+            }
+        }
 
         function initPromiseDay() {
             const isSealed = localStorage.getItem('promise_sealed') === 'true';
             const container = document.getElementById('promise-container');
+            if (!container) return;
+            isPromiseSealed = isSealed;
+
+            setPromiseStrength(0, 'Press and hold the seal to forge this promise.');
+            setPromiseCertificateUnlocked(false);
             
             if (isSealed) {
-                isPromiseSealed = true;
                 container.style.opacity = '1';
                 const seal = container.querySelector('.promise-seal');
-                seal.classList.add('sealed');
-                container.querySelector('.promise-msg').innerText = "I will always choose you.";
-                container.querySelector('.promise-msg').classList.add('visible');
+                if (seal) seal.classList.add('sealed');
+                const messageEl = container.querySelector('.promise-msg');
+                if (messageEl) {
+                    messageEl.innerText = "I will always choose you.";
+                    messageEl.classList.add('visible');
+                }
+                setPromiseStrength(100, 'Promise sealed forever.');
+                setPromiseCertificateUnlocked(true);
             } else {
                 // Initial silence
                 setTimeout(() => {
@@ -1494,8 +2591,20 @@
             if (e.type === 'touchstart') e.preventDefault();
             
             const seal = document.querySelector('.promise-seal');
+            if (!seal) return;
+
+            clearTimeout(promiseHoldTimer);
+            clearInterval(promiseStrengthInterval);
             seal.classList.add('holding');
             promiseHoldStart = Date.now();
+            setPromiseStrength(0, 'Hold steady to complete the seal...');
+
+            promiseStrengthInterval = setInterval(() => {
+                const elapsed = Date.now() - promiseHoldStart;
+                const progress = clampNumber((elapsed / PROMISE_CONFIG.holdDuration) * 100, 0, 100);
+                const note = progress >= 100 ? 'Seal complete.' : 'Keep holding...';
+                setPromiseStrength(progress, note);
+            }, 60);
             
             promiseHoldTimer = setTimeout(() => {
                 completePromise();
@@ -1505,24 +2614,42 @@
         function cancelPromiseHold() {
             if (isPromiseSealed) return;
             clearTimeout(promiseHoldTimer);
+            clearInterval(promiseStrengthInterval);
+            promiseStrengthInterval = null;
             const seal = document.querySelector('.promise-seal');
             if(seal) seal.classList.remove('holding');
+            if (promiseHoldStart) {
+                setPromiseStrength(0, 'Press and hold the seal to forge this promise.');
+            }
             promiseHoldStart = 0;
         }
 
         function completePromise() {
+            if (isPromiseSealed) return;
             isPromiseSealed = true;
             localStorage.setItem('promise_sealed', 'true');
+            clearTimeout(promiseHoldTimer);
+            clearInterval(promiseStrengthInterval);
+            promiseHoldStart = 0;
             
             const seal = document.querySelector('.promise-seal');
-            seal.classList.remove('holding');
-            seal.classList.add('sealed');
+            if (seal) {
+                seal.classList.remove('holding');
+                seal.classList.add('sealed');
+            }
             
             if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+            setPromiseStrength(100, 'Promise sealed forever.');
+            setPromiseCertificateUnlocked(true);
+            if (!isPromiseCertificateReady(getStoredPromiseCertificate())) {
+                setPromiseCertificateStatus('Now generate, share, or download your digital certificate.');
+            }
             
             const msg = document.getElementById('promise-msg');
+            if (!msg) return;
             msg.innerText = "Some promises are heavy.";
             msg.classList.add('visible');
+            burstConfetti();
             
             setTimeout(() => {
                 msg.style.opacity = '0';
